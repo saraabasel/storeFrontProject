@@ -5,8 +5,8 @@ const request = supertest(app);
 
 describe('Test endpoint responses', () => {
     it('tests GET  /users', async () => {
-        const response = await request.get('/users');
-        expect(response.status).toBe(200);
+        const response = await request.get('/users').send({"token": ""});
+        expect(response.status).toBe(401);
     });
     it('tests POST /users', async () => {
         const response = await request.post('/users');
