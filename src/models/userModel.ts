@@ -27,7 +27,7 @@ export default class UserModel
     {
         try
         {    
-            const sqlCommand = 'SELECT * FROM users WHERE user_id=($1)'
+            const sqlCommand = 'SELECT user_id,user_fname,user_lname,user_email FROM users WHERE user_id=($1)'
             const connection = await databaseClient.connect();
             const result = await connection.query(sqlCommand, [id]);
             connection.release();
@@ -44,12 +44,13 @@ export default class UserModel
         try
         {
             const connection = await databaseClient.connect();
+
             const sqlCommand = `INSERT INTO users (user_id,user_fname, user_lname, user_email, user_password) 
             VALUES($1, $2, $3, $4, $5) RETURNING user_fname, user_lname, user_email`;
 
-            const hashedPassword = bcrypt.hashSync(user.password+config.bcrypt_password,Number(config.salt_rounds));
+            const hashedPassword = bcrypt.hashSync(user.user_password+config.bcrypt_password,Number(config.salt_rounds));
             
-            const result = await connection.query(sqlCommand,[user.id,user.fname , user.lname , user.email , hashedPassword]);
+            const result = await connection.query(sqlCommand,[user.user_id,user.user_fname , user.user_lname , user.user_email , hashedPassword]);
             
             connection.release();
             return (await result).rows[0];

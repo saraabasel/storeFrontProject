@@ -3,37 +3,80 @@ The company stakeholders want to create an online storefront to showcase their g
 
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
-
-##### DATABASE SCHEMAS 
-#### Users Table 
-
-#### Products Table ####
-
-product_id (INT) | product_name (VARCHAR(50)) | product_price(INT) | product_category(VARCHAR(50)) | number_of_sells(INT)
-------------+--------------+---------------+------------------+-----------------
-
-3-Orders Table
-
-4-ProductOrder Table
-
-
-
 ## API Endpoints
-#### Products
-- Index [DONE] 
-- Show [DONE]
-- Create [token required] []
-- [OPTIONAL] Top 5 most popular products
-- [OPTIONAL] Products by category (args: product category)
+#### PRODUCTS
+# Index
+    GET http://localhost:3000/products
 
-#### Users
-- Index [token required]
-- Show [token required]
-- Create N[token required]
+# Show
+    GET  http://localhost:3000/products/:id
 
-#### Orders
-- Current Order by user (args: user id)[token required]
-- [OPTIONAL] Completed Orders by user (args: user id)[token required]
+# Create [token required]
+    POST http://localhost:3000/products
+    example for request body = {
+            "id": "1",
+            "name": "",
+            "price": "",
+            "category": "",
+            "sells_number": ""   
+            "token": ""     
+}
+- [OPTIONAL] Top 5 most popular products [Not implemented]
+- [OPTIONAL] Products by category (args: product category)[Not implemented]
+
+#### USERS
+# Index [token required]
+    GET http://localhost:3000/users 
+    Request body should be provided with the token
+    example: { "token":"brYeW0766HqA" }
+
+# Show [token required] 
+    GET  http://localhost:3000/users/:id
+    Request body should be provided with the token
+    example: {"token":"brYeW0766HqA" }
+
+
+# Create N[token required] 
+    POST http://localhost:3000/users
+    example for request body = {
+    "id" : "",
+    "fname" : "",
+    "lname" : "",
+    "email" : "",
+    "password": ""
+}
+
+#### ORDERS
+- Current Order by user (args: user id)[token required] 
+    GET http://localhost:3000/orders/current/:user_id
+    Request body should be provided with the token
+    example: {"token":"brYeW0766HqA" }
+
+- [OPTIONAL] Completed Orders by user (args: user id)[token required] 
+    GET http://localhost:3000/orders/completed/:user_id
+    Request body should be provided with the token
+    example: {"token":"brYeW0766HqA" }
+
+## DATABASE SCHEMA
+# USERS
+     user_id | user_fname | user_lname | user_email |user_password
+    ---------+------------+------------+------------+--------------
+
+# PRODUCTS
+     product_id | product_name | product_price | product_category | number_of_sells
+    ------------+--------------+---------------+------------------+-----------------
+              1 | IphoneX      |         17000 | Electronics      |              50
+              2 | IphoneXS     |         17000 | Electronics      |              50
+
+# ORDERS
+
+     order_id | user_id | order_status
+    ----------+---------+--------------
+
+# ORDER_PRODUCTS
+    order_id | product_id | quantity
+    ----------+------------+----------
+
 
 ## Data Shapes
 #### Product

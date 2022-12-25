@@ -10,18 +10,18 @@ const {
     BCRYPT_PASSWORD,
     SALT_ROUNDS,
     JSON_TOKEN,
+    POSTGRES_PORT,
     ENV
 } = process.env;
-
 
 export default {
     postgres_host: POSTGRES_HOST,
     postgres_user: POSTGRES_USER,
     postgres_password: POSTGRES_PASSWORD,
-    postgres_database: POSTGRES_DB,
-    postgres_test_database: POSTGRES_TEST_DB,
+    postgres_database: ENV === "test" ? POSTGRES_TEST_DB : POSTGRES_DB ,
     salt_rounds: SALT_ROUNDS,
     bcrypt_password: BCRYPT_PASSWORD,
     json_token: JSON_TOKEN!,
-    environment: ENV
+    postgres_port: Number(POSTGRES_PORT),
+    NODE_ENV: ENV
 };

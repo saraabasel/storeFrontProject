@@ -1,6 +1,7 @@
 import {Request , Response } from 'express';
 import OrderModel from '../models/orderModel';
-import { Order } from '../types/orderType';
+import jwt from 'jsonwebtoken';
+import config from '../configuration/config';
 
 
 const orderModel = new OrderModel();
@@ -25,6 +26,16 @@ export async function getCurrentOrdersByUserID(request : Request , response : Re
 {
     try
     {
+        jwt.verify(request.body.token,config.json_token);
+    }
+    catch(err)
+    {
+        response.status(401);
+        response.json(`Invalid token...${err}`);
+        return;
+    }
+    try
+    {
         const currentOrders = await orderModel.getCurrentOrdersByUserID(request.params.id);
         if(!currentOrders) {response.send(`No active orders are found for user with id = ${request.params.id}`);}
         response.send(
@@ -42,6 +53,16 @@ export async function getCurrentOrdersByUserID(request : Request , response : Re
 
 export async function getCompletedOrdersByUserID(request : Request , response : Response)
 {
+    try
+    {
+        jwt.verify(request.body.token,config.json_token);
+    }
+    catch(err)
+    {
+        response.status(401);
+        response.json(`Invalid token...${err}`);
+        return;
+    }
     try
     {
         const completedOrders = await orderModel.getCompletedOrdersByUserID(request.params.id);

@@ -2,7 +2,6 @@ import databaseClient from '../../database/databaseConnection';
 import UserModel from '../userModel';
 import { User } from '../../types/userType';
 
-
 const userModel = new UserModel();
 
 describe("Product Model" , () => {   
@@ -16,13 +15,18 @@ describe("Product Model" , () => {
 
     beforeAll(async () =>  {
 
+        const connection = await databaseClient.connect();
+        const sqlCommand = 'DELETE FROM users';
+        await connection.query(sqlCommand);
+        connection.release();
+
         const user : User = 
         {
-            id: 1 ,
-            fname: 'Sara',
-            lname: 'basil',
-            email: 'sarabasel@gmail.com',
-            password: 'test'
+            user_id: 1 ,
+            user_fname: 'Sara',
+            user_lname: 'basel',
+            user_email: 'sarabasel@gmail.com',
+            user_password: 'test'
         }
         await userModel.createUser(user);
     });
@@ -40,7 +44,7 @@ describe("Product Model" , () => {
         expect(userModel.getAllUsers).toBeDefined();
     })
 
-    it('getAllUsers method should return a list of products', async () =>
+    it('getAllUsers function should return a list of users', async () =>
     {
         const result = await userModel.getAllUsers();
         expect(result.length).toEqual(1);
@@ -50,4 +54,27 @@ describe("Product Model" , () => {
     { 
         expect(userModel.showUser).toBeDefined();
     })
+
+    it('showUser function should return the correct user', async () => {
+        const result = await userModel.showUser("1");
+        expect(result.user_fname).toEqual('Sara');
+        expect(result.user_email).toEqual('sarabasel@gmail.com');
+      });
+
+      it('createUser function should exist', () =>
+    { 
+        expect(userModel.showUser).toBeDefined();
+    })
+
+
+    it('createUser function should add a product', async () => {
+        const result = await userModel.createUser({
+            user_id: 2 ,
+            user_fname: 'Sara',
+            user_lname: 'basel',
+            user_email: 'sarabaseltest@gmail.com',
+            user_password: 'test'
+            });
+        expect(result.user_fname).toEqual('Sara');
+      });
 });
