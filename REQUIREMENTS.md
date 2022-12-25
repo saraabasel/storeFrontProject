@@ -3,18 +3,33 @@ The company stakeholders want to create an online storefront to showcase their g
 
 These are the notes from a meeting with the frontend developer that describe what endpoints the API needs to supply, as well as data shapes the frontend and backend have agreed meet the requirements of the application. 
 
+
+##### DATABASE SCHEMAS 
+#### Users Table 
+
+#### Products Table ####
+
+product_id (INT) | product_name (VARCHAR(50)) | product_price(INT) | product_category(VARCHAR(50)) | number_of_sells(INT)
+------------+--------------+---------------+------------------+-----------------
+
+3-Orders Table
+
+4-ProductOrder Table
+
+
+
 ## API Endpoints
 #### Products
-- Index 
-- Show
-- Create [token required]
+- Index [DONE] 
+- Show [DONE]
+- Create [token required] []
 - [OPTIONAL] Top 5 most popular products
 - [OPTIONAL] Products by category (args: product category)
 
 #### Users
 - Index [token required]
 - Show [token required]
-- Create [token required]
+- Create N[token required]
 
 #### Orders
 - Current Order by user (args: user id)[token required]
@@ -31,7 +46,7 @@ These are the notes from a meeting with the frontend developer that describe wha
 - id
 - firstName
 - lastName
-- password
+- password`
 
 #### Orders
 - id
@@ -39,4 +54,3 @@ These are the notes from a meeting with the frontend developer that describe wha
 - quantity of each product in the order
 - user_id
 - status of order (active or complete)
-

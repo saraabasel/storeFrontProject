@@ -13,9 +13,8 @@
         "user": "postgres",
         "password": "sara",
         "host": "localhost",
-        "database": "storefronttest",
+        "database": "storefront",
         "port": "5432"
-
     }
 
 }

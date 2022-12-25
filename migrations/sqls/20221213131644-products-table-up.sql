@@ -1,10 +1,10 @@
 
 CREATE TABLE products 
 (
-    product_id SERIAL PRIMARY KEY,
-    product_name VARCHAR(100),
-    product_description TEXT,
+    product_id  INT ,
+    product_name VARCHAR(50),
     product_price INT,
-    product_category VARCHAR(100),
-    product_sells_number INT
+    product_category VARCHAR(50),
+    number_of_sells INT,
+    PRIMARY KEY(product_id)
 );

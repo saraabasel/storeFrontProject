@@ -1,4 +1,39 @@
 # Storefront Backend Project
+# Steps to run the project
+
+    1- run 'yarn' to install all needed package
+    2- run 'yarn build' to build the project
+    3- run 'yarn watch' to run the project
+    4- run 'yarn test' to run all the test specs
+    5- Create .env file in root directory
+        The env file should contain the following variables
+        POSTGRES_HOST=*****
+        POSTGRES_DB=*****
+        POSTGRES_TEST_DB=*****
+        POSTGRES_USER=*****
+        POSTGRES_PASSWORD=******
+        BCRYPT_PASSWORD=*****
+        SALT_ROUNDS=*****
+        JSON_TOKEN=*****
+        ENV=*****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Getting Started
 

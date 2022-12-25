@@ -1,5 +1,7 @@
 export type Product = {
-    name : string;
-    price : number;
-    category : string;
+    product_id : string;
+    product_name : string;
+    product_price : number;
+    product_category : string;
+    number_of_sells : number;
 }
