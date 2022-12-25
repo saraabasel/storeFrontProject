@@ -14,11 +14,13 @@ const {
     ENV
 } = process.env;
 
+
+
 export default {
     postgres_host: POSTGRES_HOST,
     postgres_user: POSTGRES_USER,
     postgres_password: POSTGRES_PASSWORD,
-    postgres_database: ENV === "test" ? POSTGRES_TEST_DB : POSTGRES_DB ,
+    postgres_database: ENV?.trim() === "test" ? POSTGRES_TEST_DB : POSTGRES_DB ,
     salt_rounds: SALT_ROUNDS,
     bcrypt_password: BCRYPT_PASSWORD,
     json_token: JSON_TOKEN!,

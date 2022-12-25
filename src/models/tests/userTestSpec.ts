@@ -4,7 +4,7 @@ import { User } from '../../types/userType';
 
 const userModel = new UserModel();
 
-describe("Product Model" , () => {   
+describe("User Model" , () => {   
       
     beforeEach(function() {
     });
@@ -14,11 +14,6 @@ describe("Product Model" , () => {
     });
 
     beforeAll(async () =>  {
-
-        const connection = await databaseClient.connect();
-        const sqlCommand = 'DELETE FROM users';
-        await connection.query(sqlCommand);
-        connection.release();
 
         const user : User = 
         {
