@@ -37,4 +37,15 @@ describe('Test endpoint responses', () => {
         expect(response.status).toBe(200);
     });
 
+    it('tests GET /current/orders/:user_id', async () => {
+        const response =  await request.get('/orders/current/1').send({"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZm5hbWUiOiJzYXJhIiwidXNlcl9sbmFtZSI6Im1vc3RhZmEiLCJ1c2VyX2VtYWlsIjoibWFuYWxhaG1lZHRlc3Rtb3N0YWZhOTMzNUBnbWFpbC5jb20ifSwiaWF0IjoxNjcxOTk0ODI5fQ.8HOSCxeULRJE36eNyOJG_KTuS4GwrGOF22zLdd9NfWs"});
+        expect(response.status).toBe(200);
+    });
+
+    it('tests GET /orders/completed/:user_id', async () => {
+        const response =  await request.get('/orders/completed/1').send({"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7InVzZXJfZm5hbWUiOiJzYXJhIiwidXNlcl9sbmFtZSI6Im1vc3RhZmEiLCJ1c2VyX2VtYWlsIjoibWFuYWxhaG1lZHRlc3Rtb3N0YWZhOTMzNUBnbWFpbC5jb20ifSwiaWF0IjoxNjcxOTk0ODI5fQ.8HOSCxeULRJE36eNyOJG_KTuS4GwrGOF22zLdd9NfWs"});
+        expect(response.status).toBe(200);
+    });
+
+
 });
