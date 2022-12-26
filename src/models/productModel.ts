@@ -19,7 +19,7 @@ export default class ProductModel
         }
         catch(err)
         {
-            throw new Error('Cannot get all products..${err}');  
+            throw new Error(`Cannot get all products..${err}`);  
         }
 
     }

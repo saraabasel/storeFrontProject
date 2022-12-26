@@ -12,13 +12,11 @@ export async function getAllProducts(request : Request , response : Response)
     try
     {
         const allProducts = await productModel.getAllProducts();
-        if(!allProducts) { response.send('No product are found.'); }
         response.send(
             {
                 status: 200,
                 data: allProducts
-            }
-        );
+            });
     }
     catch(err)
     {
@@ -31,7 +29,12 @@ export async function showProduct(request : Request , response : Response)
     try
     {
         const selectedProduct = await productModel.showProduct(request.params.id);
-        if(!selectedProduct) {response.send('Cannot find a product with id = ' + request.params.id)};
+        if(!selectedProduct) 
+        {
+            response.send('Cannot find a product with id = ' + request.params.id)
+            return;
+        };
+        
         response.send(
             {
                 status: 200,

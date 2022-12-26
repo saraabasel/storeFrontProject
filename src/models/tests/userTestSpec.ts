@@ -26,14 +26,6 @@ describe("User Model" , () => {
         await userModel.createUser(user);
     });
 
-    afterAll(async () =>  {
-
-        const connection = await databaseClient.connect();
-        const sqlCommand = 'DELETE FROM users';
-        await connection.query(sqlCommand);
-        connection.release();
-    });
-
     it('getAllUsers function should exist', () =>
     { 
         expect(userModel.getAllUsers).toBeDefined();
@@ -62,7 +54,7 @@ describe("User Model" , () => {
     })
 
 
-    it('createUser function should add a product', async () => {
+    it('createUser function should add a user', async () => {
         const result = await userModel.createUser({
             user_id: 2 ,
             user_fname: 'Sara',

@@ -59,21 +59,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 ## DATABASE SCHEMA
 # USERS
-     user_id | user_fname | user_lname | user_email |user_password
+PRIMARY KEY -->  user_id
+
+     user_id INT| user_fname VARCHAR(50) | user_lname VARCHAR(50)| user_email VARCHAR |user_password VARCHAR
     ---------+------------+------------+------------+--------------
 
 # PRODUCTS
-     product_id | product_name | product_price | product_category | number_of_sells
-    ------------+--------------+---------------+------------------+-----------------
-              1 | IphoneX      |         17000 | Electronics      |              50
-              2 | IphoneXS     |         17000 | Electronics      |              50
+PRIMARY KEY --> product_id
+
+     product_id INT| product_name VARCHAR(50)| product_price INT  | product_category VARCHAR(50)| number_of_sells INT
+    ------------+--------------+---------------+------------------+
 
 # ORDERS
+PRIMARY KEY --> order_id
+FOREIGN KEY --> user_id
 
      order_id | user_id | order_status
     ----------+---------+--------------
 
 # ORDER_PRODUCTS
+
+PRIMARY KEY --> order_id + product_id
     order_id | product_id | quantity
     ----------+------------+----------
 

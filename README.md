@@ -2,10 +2,7 @@
 # Steps to run the project
 
     1- run 'npm install' to install all needed package
-    2- run 'npm run build' to build the project
-    3- run 'npm run start' to run the project
-    4- run 'npm run test' to run all the test specs
-    5- Create .env file in root directory
+    2- Create .env file in root directory
         The env file should contain the following variables
         POSTGRES_HOST=*****
         POSTGRES_DB=*****
@@ -17,6 +14,10 @@
         JSON_TOKEN=*****
         POSTGRES_PORT=****
         ENV=*****
+    3- run 'npm run build' to build the project
+    4- run 'db-migrate up' to create all the needed tables in the database
+    5- run 'npm run start' to start the server
+    6- run 'npm run test' to run all the tests
 
 ### Ports
 
