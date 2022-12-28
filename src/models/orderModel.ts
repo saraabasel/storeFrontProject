@@ -4,13 +4,13 @@ import { Order } from '../types/orderType';
 
 export default class OrderModel
 {
-    async getAllOrders() : Promise<Order[]>
+    async getAllOrders(userID: string) : Promise<Order[]>
     {
         try
         {
             const connection = await databaseClient.connect();
-            const sqlCommand = 'SELECT * FROM orders ';
-            const result = await connection.query(sqlCommand);
+            const sqlCommand = 'SELECT * FROM orders WHERE user_id=($1)';
+            const result = await connection.query(sqlCommand,[userID]);
             connection.release();
             return (await result).rows;
         }

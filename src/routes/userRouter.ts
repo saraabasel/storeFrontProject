@@ -1,13 +1,13 @@
 import express from 'express';
 import * as UserController  from '../controllers/usersController';
-import { authenticateUser } from '../middlewares/authMiddleware';
+import { authenticationMiddleware } from '../middlewares/authMiddleware';
 
 
 const userRouter = express.Router();
 
-userRouter.get('/', UserController.getAllUsers);
+userRouter.get('/', authenticationMiddleware ,UserController.getAllUsers);
 
-userRouter.get('/:id', UserController.showUser);
+userRouter.get('/:id', authenticationMiddleware , UserController.showUser);
  
 userRouter.post('/' , UserController.createUser);
 

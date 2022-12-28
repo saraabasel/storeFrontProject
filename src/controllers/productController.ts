@@ -1,8 +1,6 @@
 import {Request , Response } from 'express';
 import ProductModel from "../models/productModel";
 import { Product } from '../types/productType';
-import jwt from 'jsonwebtoken';
-import config from '../configuration/config';
 
 
 const productModel = new ProductModel();
@@ -43,22 +41,12 @@ export async function showProduct(request : Request , response : Response)
     }
     catch(err)
     {
-        response.send(`Something went wrong while trying to get the product...${err}`);
+        response.send(`Something went wrong while trying to get the product with id=${request.params.id}...${err}`);
     }
 }
 
 export async function createProduct(request : Request , response : Response)
 {
-    try
-    {
-        jwt.verify(request.body.token,config.json_token);
-    }
-    catch(err)
-    {
-        response.status(401);
-        response.json(`Invalid token...${err}`);
-        return;
-    }
     try 
     {
         const createdProduct : Product = 

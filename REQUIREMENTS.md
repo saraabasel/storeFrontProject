@@ -13,28 +13,27 @@ These are the notes from a meeting with the frontend developer that describe wha
 
 # Create [token required]
     POST http://localhost:3000/products
-    example for request body = {
-            "id": "1",
-            "name": "",
-            "price": "",
-            "category": "",
-            "sells_number": ""   
-            "token": ""     
-}
+    example for request body =
+    {
+        "id": "1",
+        "name": "",
+        "price": "",
+        "category": "",
+        "sells_number": ""   
+    }
+    Token should be provided through authorization header
+
 - [OPTIONAL] Top 5 most popular products [Not implemented]
 - [OPTIONAL] Products by category (args: product category)[Not implemented]
 
 #### USERS
 # Index [token required]
     GET http://localhost:3000/users 
-    Request body should be provided with the token
-    example: { "token":"brYeW0766HqA" }
+    Token should be provided through authorization header
 
 # Show [token required] 
     GET  http://localhost:3000/users/:id
-    Request body should be provided with the token
-    example: {"token":"brYeW0766HqA" }
-
+    Token should be provided through authorization header
 
 # Create N[token required] 
     POST http://localhost:3000/users
@@ -47,15 +46,16 @@ These are the notes from a meeting with the frontend developer that describe wha
 }
 
 #### ORDERS
-- Current Order by user (args: user id)[token required] 
-    GET http://localhost:3000/orders/current/:user_id
-    Request body should be provided with the token
-    example: {"token":"brYeW0766HqA" }
 
-- [OPTIONAL] Completed Orders by user (args: user id)[token required] 
+User can view 
+1- All orders through GET http://localhost:3000/orders/:user_id [token requied]
+
+2-Current Orders by user (args: user id)[token required] 
+    GET http://localhost:3000/orders/current/:user_id
+  
+3-[OPTIONAL] Completed Orders by user (args: user id)[token required] 
     GET http://localhost:3000/orders/completed/:user_id
-    Request body should be provided with the token
-    example: {"token":"brYeW0766HqA" }
+
 
 ## DATABASE SCHEMA
 # USERS

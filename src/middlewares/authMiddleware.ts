@@ -1,31 +1,40 @@
 import { NextFunction, Request, Response } from "express";
-import databaseClient from "../database/databaseConnection";
-import { User } from "../types/userType";
-import config from '../configuration/config';
-import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
+import config from "../configuration/config";
 
-export async function authenticateUser(request : Request , response : Response , next : NextFunction) : Promise<User | null>
+export  function authenticationMiddleware(request : Request , 
+    response : Response , next : NextFunction) : void
 {
     try
     {
-        const connection  = await databaseClient.connect();
-        const sqlCommand = 'SELECT user_password FROM users WHERE user_email=($1)';
-        const result = await  connection.query(sqlCommand,[request.body.email]);
-        if(result.rows.length)
+        const authHeader = request.headers.authorization;
+        if(authHeader)
         {
-            const user = result.rows[0];
-            if(bcrypt.compareSync(request.body.password + config.bcrypt_password, user.password))
-            { 
-                next();
-                return user;
+            const bearer = authHeader.split(" ")[0].toLowerCase();
+            const token = authHeader.split(" ")[1];
+            if(token && bearer === 'bearer')
+            {
+                if(jwt.verify(token , config.json_token as string))
+                {
+                    response.locals.decodedJWT = jwt.verify(token , config.json_token as string)
+                    next();
+                   
+                  
+                }
+            }
+            else
+            {
+                response.status(401);
+                response.send(`Invalid token.`);
             }
         }
-        next();
-        return null;
+        else
+        {
+            response.send('A token must be provided.');
+        }
     }
     catch(err)
     {
-        throw new Error(`Incorrect email or password...${err}`);
-    }
 
+    }
 }

@@ -10,19 +10,13 @@ const userModel : UserModel = new UserModel();
 export async function getAllUsers(request: Request , response: Response)  
 {
     try
-    {
-        jwt.verify(request.body.token,config.json_token);
-    }
-    catch(err)
-    {
-        response.status(401);
-        response.json(`Invalid token...${err}`);
-        return;
-    }
-    try
-    {
+    { 
             const allUsers = await userModel.getAllUsers();
-            if (!allUsers) { response.send('No users are found.')};
+            if (!allUsers)
+            {
+                response.send('No users are found.');
+                return;
+            }
             response.send({
               status: 200,
               data: allUsers
@@ -38,16 +32,6 @@ export async function showUser(request :Request , response:Response)
 {
     try
     {
-        jwt.verify(request.body.token,config.json_token);
-    }
-    catch(err)
-    {
-        response.status(401);
-        response.json(`Invalid token...${err}`);
-        return;
-    }
-    try
-    {
         const selectedUser = await userModel.showUser(request.params.id);
         if(!selectedUser) {response.send('Cannot find a user with id = ' + request.params.id)}
         response.send({
@@ -57,6 +41,8 @@ export async function showUser(request :Request , response:Response)
     }
     catch(err)
     {
+        response.send(`Something went wrong while trying to get a 
+        user with id = ${request.params.id}...${err}`);
     }
 }
 
@@ -76,13 +62,14 @@ export async function createUser(request : Request , response : Response)
         const newUser = await userModel.createUser(user);
         var token = jwt.sign({user : newUser} , config.json_token);
         response.send
-            ({
+        ({
                 status : 200,
                 data: token
-            });
+        });
     }
     catch(err)
     {
-        response.send(`Something went wrong while trying to create a user... ${err}`);
+        response.send(`Something went wrong while trying to 
+        create a user... ${err}`);
     }
 }

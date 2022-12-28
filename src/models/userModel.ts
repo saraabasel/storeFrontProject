@@ -46,7 +46,7 @@ export default class UserModel
             const connection = await databaseClient.connect();
 
             const sqlCommand = `INSERT INTO users (user_id,user_fname, user_lname, user_email, user_password) 
-            VALUES($1, $2, $3, $4, $5) RETURNING user_fname, user_lname, user_email`;
+            VALUES($1, $2, $3, $4, $5) RETURNING user_id, user_fname, user_lname, user_email`;
 
             const hashedPassword = bcrypt.hashSync(user.user_password+config.bcrypt_password,Number(config.salt_rounds));
             

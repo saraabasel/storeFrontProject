@@ -13,7 +13,6 @@ describe("Order Model" , () => {
     it('getCurrentOrdersByUserID function should return all the active order for the user', async () => 
     { 
        const result = await orderModel.getCurrentOrdersByUserID("1");
-       console.log(result);
        expect(result.length).toEqual(0);
     })
 
