@@ -35,6 +35,11 @@ describe('Test endpoint responses', () => {
         expect(response.status).toBe(200);
     });
 
+    it('tests GET /orders/:user_id', async () => {
+        const response =  await request.get('/orders/1');
+        expect(response.status).toBe(200);
+    });
+
     it('tests GET /current/orders/:user_id', async () => {
         const response =  await request.get('/orders/current/1');
         expect(response.status).toBe(200);

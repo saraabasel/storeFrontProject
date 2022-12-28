@@ -1,7 +1,5 @@
 import {Request , Response } from 'express';
 import OrderModel from '../models/orderModel';
-import jwt from 'jsonwebtoken';
-import config from '../configuration/config';
 
 
 const orderModel = new OrderModel();
